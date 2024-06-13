@@ -20,3 +20,20 @@ class TestSimilarChecker(TestCase):
         self.assert_illegal_input(None, None)
         self.assert_illegal_input("abc", "AbC")
         self.assert_illegal_input("123", "12A")
+
+
+    def test_len_is_more_than_twice(self):
+        str1 = "AB"
+        str2 = "B"
+        self.assertEqual(0, self.checker.check_length(str1, str2))
+
+    def test_len_is_same(self):
+        str1 = "AB"
+        str2 = "BC"
+        self.assertEqual(60, self.checker.check_length(str1, str2))
+
+    def test_len_is_different(self):
+        str1 = "AA"
+        str2 = "BAA"
+        self.assertEqual(30, self.checker.check_length(str1, str2))
+
