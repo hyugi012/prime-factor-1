@@ -20,3 +20,12 @@ class TestSimilarChecker(TestCase):
         self.assert_illegal_input(None, None)
         self.assert_illegal_input("abc", "AbC")
         self.assert_illegal_input("123", "12A")
+
+    def test_same_alpha(self):
+        self.assertEqual(40, self.checker.check_alpha("AB", "BA"))
+
+    def test_different_alpha(self):
+        self.assertEqual(0, self.checker.check_alpha("A","B"))
+
+    def test_some_same_alpha(self):
+        self.assertEqual(20, self.checker.check_alpha("AA", "AAE"))
