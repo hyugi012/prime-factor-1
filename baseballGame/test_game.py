@@ -23,7 +23,7 @@ class TestGame(TestCase):
         self.assert_illegal_argument("12s")
         self.assert_illegal_argument("121")
 
-    def asset_matched_numbers(self, result, balls, solved, strikes):
+    def assert_matched_numbers(self, result, solved, strikes, balls):
         self.assertIsNotNone(result)
         self.assertEqual(solved, result.get_solved())
         self.assertEqual(strikes, result.get_strikes())
@@ -34,9 +34,12 @@ class TestGame(TestCase):
 
     def test_return_solve_if_matched(self):
         self.generate_question("123")
-        self.asset_matched_numbers(self.game.guess("123"), 0, True, 3)
+        self.assert_matched_numbers(self.game.guess("123"), True, 3, 0)
 
     def test_return_solve_if_not_matched(self):
         self.generate_question("123")
-        self.asset_matched_numbers(self.game.guess("456"), 0, False, 0)
+        self.assert_matched_numbers(self.game.guess("456"), False, 0, 0)
 
+    def test_return_solve_if_some_matched(self):
+        self.generate_question("123")
+        self.assert_matched_numbers(self.game.guess("120"), False, 2, 0)

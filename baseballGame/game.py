@@ -10,7 +10,12 @@ class Game:
         if guess == self.question:
             return GameResult(True, 3, 0)
         else:
-            return GameResult(False, 0, 0)
+            strikes = 0
+            for i in range(len(self.question)):
+                if self.question.find(guess[i]) == i:
+                    strikes += 1
+
+            return GameResult(False, strikes, 0)
 
     def asset_illegal_input(self, guess):
         if guess is None:
