@@ -7,15 +7,27 @@ class Game:
 
     def guess(self, guess):
         self.asset_illegal_input(guess)
-        if guess == self.question:
-            return GameResult(True, 3, 0)
+        if self.is_solved(guess):
+            return self.get_success_result()
         else:
-            strikes = 0
-            for i in range(len(self.question)):
-                if self.question.find(guess[i]) == i:
-                    strikes += 1
+            balls, strikes = self.get_unsolved_result(guess)
+            return GameResult(False, strikes, balls)
 
-            return GameResult(False, strikes, 0)
+    def get_unsolved_result(self, guess):
+        strikes = 0
+        balls = 0
+        for i in range(len(self.question)):
+            if self.question.find(guess[i]) == i:
+                strikes += 1
+            elif self.question.find(guess[i]) > -1:
+                balls += 1
+        return balls, strikes
+
+    def get_success_result(self):
+        return GameResult(True, 3, 0)
+
+    def is_solved(self, guess):
+        return guess == self.question
 
     def asset_illegal_input(self, guess):
         if guess is None:
