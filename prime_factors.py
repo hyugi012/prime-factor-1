@@ -2,5 +2,6 @@ class PrimeFactors:
     def __init__(self):
         pass
 
-    def of(self, n):
-        return 2
+    def of(self, number) -> list:
+        factors = []
+        return factors

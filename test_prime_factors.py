@@ -4,7 +4,7 @@ from prime_factors import PrimeFactors
 
 
 class TestPrimeFactors(TestCase):
-    def test_prime_factors(self):
+    def test_prime_factor_of_1(self):
         prime_factor = PrimeFactors()
-        self.assertEqual(2, prime_factor.of(2))
+        self.assertEqual([], prime_factor.of(1))
 
