@@ -1,17 +1,27 @@
+from baseballGame.game_result import GameResult
+
+
 class Game:
+    def __init__(self):
+        self.question = ""
+
     def guess(self, guess):
         self.asset_illegal_input(guess)
+        if guess == self.question:
+            return GameResult(True, 3, 0)
+        else:
+            return GameResult(False, 0, 0)
 
     def asset_illegal_input(self, guess):
         if guess is None:
-            raise TypeError()
+            raise TypeError
         if len(guess) != 3:
-            raise TypeError()
+            raise TypeError
         if self.is_duplicated_numbers(guess):
-            raise TypeError()
+            raise TypeError
         for number in guess:
-            if ord('0') <= ord(number) <= ord('9'):
-                raise TypeError()
+            if not ord('0') <= ord(number) <= ord('9'):
+                raise TypeError
 
     def is_duplicated_numbers(self, guess):
         return guess[0] == guess[1] or \
