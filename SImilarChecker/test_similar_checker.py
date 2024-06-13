@@ -11,7 +11,7 @@ class TestSimilarChecker(TestCase):
 
     def assert_illegal_input(self, str1, str2):
         try:
-            self.checker.check_length(str1, str2)
+            self.checker.check_similarity(str1, str2)
             self.fail()
         except TypeError:
             pass
@@ -25,15 +25,15 @@ class TestSimilarChecker(TestCase):
     def test_len_is_more_than_twice(self):
         str1 = "AB"
         str2 = "B"
-        self.assertEqual(0, self.checker.check_length(str1, str2))
+        self.assertEqual(0, self.checker.calc_length(str1, str2))
 
     def test_len_is_same(self):
         str1 = "AB"
         str2 = "BC"
-        self.assertEqual(60, self.checker.check_length(str1, str2))
+        self.assertEqual(60, self.checker.calc_length(str1, str2))
 
     def test_len_is_different(self):
         str1 = "AA"
         str2 = "BAA"
-        self.assertEqual(30, self.checker.check_length(str1, str2))
+        self.assertEqual(30, self.checker.calc_length(str1, str2))
 
